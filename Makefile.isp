@@ -1,0 +1,30 @@
+.PHONY: all
+.PHONY: install
+.PHONY: clean
+
+ISP_PREFIX ?= $(HOME)/.local/isp/
+
+SRC_DIR := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
+INSTALL_DIR := $(ISP_PREFIX)/hope-seL4
+
+all: setup-sel4
+
+install: all copy-src
+
+setup-sel4:
+	./setup.sh
+
+copy-src:
+	mkdir -p $(INSTALL_DIR)
+	cp -rf kernel $(INSTALL_DIR)
+	cp -rf projects $(INSTALL_DIR)
+	cp -rf tools $(INSTALL_DIR)
+	ln -sf tools/cmake-tool/init-build.sh $(INSTALL_DIR)
+
+clean:
+	rm init-build.sh
+	rm -rf kernel
+	rm -rf tools
+
+uninstall:
+	rm -rf $(INSTALL_DIR)
