@@ -1,8 +1,11 @@
 init-build.sh
+make-riscv-build.sh
 kernel/
 build/
 tools/
 projects/musllibc/
 projects/seL4_libs/
 projects/util_libs/
-
+projects/sel4runtime/
+projects/bootstrap_main/src/target.a
+riscv-build-*
